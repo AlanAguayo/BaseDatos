@@ -1,9 +1,16 @@
 package sample.components;
 
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import sample.models.ProductosDAO;
 import sample.view.frmProductos;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.util.Optional;
 
 
@@ -21,7 +28,7 @@ public class CellCustome extends TableCell<ProductosDAO, String> {
                 new frmProductos(CellCustome.this.getTableView(),objCDAO);
             });
         }
-        if(opc ==2 ) {
+        if(opc == 2) {
             btnCelda = new Button("Borrar");
             btnCelda.setOnAction(event -> {
                 Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
@@ -37,6 +44,21 @@ public class CellCustome extends TableCell<ProductosDAO, String> {
                     CellCustome.this.getTableView().refresh();
                 }
             });
+        }
+        if(opc==3){
+            objCDAO = CellCustome.this.getTableView().getItems().get(12);
+            ByteArrayInputStream bis = new ByteArrayInputStream(objCDAO.getImagen());
+            BufferedImage read = null;
+            {
+                try {
+                    read = ImageIO.read(bis);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            Image i = SwingFXUtils.toFXImage(read, null);
+            CellCustome.this.getTableView().setItems(objCDAO.SELECT());
+            CellCustome.this.getTableView().refresh();
         }
     }
 

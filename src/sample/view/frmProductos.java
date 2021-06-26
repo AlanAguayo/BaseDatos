@@ -97,7 +97,6 @@ public class frmProductos extends Stage {
                 objCDAO.setDisponible("Descontinuado");
             }
 
-            ////////////////////
             try{
                 File ruta = new File(txtruta.getText());
                 InputStream input = new FileInputStream(ruta);
@@ -110,7 +109,6 @@ public class frmProductos extends Stage {
                 objCDAO.setImagen(null);
             }
 
-            /////////////////////
             if(objCDAO.getId_producto()>0) {
                 objCDAO.UPDATE();
             }else {

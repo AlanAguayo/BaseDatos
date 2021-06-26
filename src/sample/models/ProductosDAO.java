@@ -13,8 +13,8 @@ public class ProductosDAO {
     private String nombre_producto;
     private int existencia;
     private String disponible;
-
     private byte[] imagen;
+    private Image imagenRender;
 
     public int getId_producto() {
         return id_producto;
@@ -56,7 +56,6 @@ public class ProductosDAO {
         this.imagen = imagen;
     }
 
-    //Manda datos
     public void INSERT() {
         try {
             String query = "INSERT INTO tbl_productos (nombre_producto, existencia, disponible, imagen) " +
@@ -69,7 +68,6 @@ public class ProductosDAO {
         }
     }
 
-    //Manda datos (Actualiza la DB)
     public void UPDATE() {
         try {
             String query = "UPDATE tbl_productos SET nombre_producto = '" + nombre_producto + "', existencia = " + existencia + ", " +
@@ -82,7 +80,6 @@ public class ProductosDAO {
         }
     }
 
-    //Borra datos
     public void DELETE() {
         try {
             String query = "DELETE FROM tbl_productos WHERE id_producto = " + id_producto;
@@ -93,7 +90,6 @@ public class ProductosDAO {
         }
     }
 
-    //Trae datos
     public ObservableList<ProductosDAO> SELECT() {
 
         ObservableList<ProductosDAO> listaC = FXCollections.observableArrayList();
@@ -119,12 +115,6 @@ public class ProductosDAO {
             e.printStackTrace();
         }
         return listaC;
-    }
-
-    public Image renderImagen() throws IOException {
-        Image i= new Image(getClass().getResourceAsStream(this.getImagen().toString()));
-
-        return i;
     }
 
 }
